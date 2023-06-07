@@ -1,2 +1,3 @@
 #!/bin/bash
-echo $PATH
+absolute_path=$(pwd)
+echo "$absolute_path/0x00-shell_basics"
