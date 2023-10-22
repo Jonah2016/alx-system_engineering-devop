@@ -1,3 +1,17 @@
+# My Procedure for pushing the image files to my sandbox from my local machine
+1. I first SSH into my sandbox using the credentials provided on the intranet. 
+Example: “ssh sammy@your_server_ip_or_remote_hostname “ and also used the password provided.
+2. I then existed the ssh after it was successful, using the “exit” command.
+3. I  used the sftp command with the same address to establish the connection between 
+my local machine terminal and the intranet sandbox. “sftp sammy@your_server_ip_or_remote_hostname”.
+4. Once I was in the sandbox I navigated to the repo that I had already created for the project, 
+using the normal “cd” command in the terminal.
+5. In the correct directory, I used the “lpwd” command to check where I was working on my local directory.
+6. I used the “lls” command to list the local directory and used the “lcd” to navigate to where the screenshot files are stored.
+7. Now I used the “put” command along side with the file names to push the files to the sandbox.
+8. I confirmed the files were present in the sandbox and then I pushed to git hub
+
+
 # Background Context
 CMD CHALLENGE is a pretty cool game challenging you on Bash skills. 
 Everything is done via the command line and the questions are becoming increasingly complicated. 
