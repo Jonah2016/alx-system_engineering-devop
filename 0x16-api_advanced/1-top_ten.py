@@ -1,36 +1,21 @@
 #!/usr/bin/python3
-"""
-Query for the top 10 hottest posts
-in a subreddit
-"""
+"""Function to print hot posts on a given Reddit subreddit."""
 import requests
 
 
 def top_ten(subreddit):
-    """
-    Function to get the top 10 hottest
-    posts of a givne subreddit
-
-    Parameters:
-        subreddit - subreddit to check.
-
-    Return:
-        PRINT titles of top 10 hottest posts, or None
-    """
-    if subreddit is None or type(subreddit) is not str:
-        print(None)
+    """Print the titles of the 10 hottest posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
-            AppleWebKit/537.36 (KHTML, like Gecko)\
-            Chrome/102.0.0.0 Safari/537.36'
-            }
-    r = requests.get(
-            f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10",
-            allow_redirects=False,
-            headers=headers
-            )
-    if r.status_code != 200:
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+    }
+    params = {
+        "limit": 10
+    }
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+    if response.status_code == 404:
         print("None")
         return
-    for child in r.json()["data"]["children"][1:]:
-        print(child["data"]["title"])
+    results = response.json().get("data")
+    [print(c.get("data").get("title")) for c in results.get("children")]
