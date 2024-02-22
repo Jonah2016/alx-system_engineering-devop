@@ -1,6 +1,9 @@
-# too many files error in /var/log/nginx/error.log
+# set new limit
 
-exec { 'fix--for-nginx':
-  command => 'sed -i "s/15/12000/" /etc/default/nginx && sudo service nginx restart',
-  path    =>'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games',
+$user = 'holberton'
+
+# Set the file descriptor limits using exec
+exec { 'change-os-configuration-for-holberton-user':
+  command => "sed -i '/$user hard/s/5/10000/; /$user soft/s/4/15000/' /etc/security/limits.conf",
+  path    => '/usr/locla/bin/:/bin/'
 }
