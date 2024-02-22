@@ -1,12 +1,6 @@
-# too many files error in /var/log/nginx/error.log
-
+# Fixes an nginx site that can not_handle multiple concurrent requests
 exec { 'fix--for-nginx':
-  command => '/bin/sed -i "s/15/4096/" /etc/default/nginx',
-  path    =>'/usr/local/bin/:/bin/',
-}
-
-# Restart nginx
-exec { 'nginx-restart':
-  command => '/etc/init.d/nginx restart',
-  path    =>'/etc/init.d/',
+  command => "bash -c \"sed -iE 's/^ULIMIT=.*/ULIMIT=\\\"-n 8192\\\"/' \
+/etc/default/nginx; service nginx restart\"",
+  path    => '/usr/bin:/usr/sbin:/bin'
 }
