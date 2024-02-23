@@ -6,7 +6,7 @@ upstream app_server_airbnb {
 server {
         listen 80;
         listen [::]:80 default_server;
-        server_name _;
+        server_name localhost jonah2016.tech 54.165.43.217;
 
         root /data/web_static/current/;
         index index.html 0-index.html index.htm index.nginx-debian.html;
