@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 # Script reloads gunicorn
 
-pgrep gunicorn | xargs kill -HUP
+# Find the process ID of the master Gunicorn process
+MASTER_PID=$(pgrep -f "gunicorn -b 0.0.0.0:5003")
+
+# Send a HUP signal to the master process to trigger a reload
+kill -HUP $MASTER_PID
+
+echo "Gunicorn reloaded successfully!"
